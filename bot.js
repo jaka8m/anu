@@ -10,11 +10,11 @@ export class TelegramWildcardBot {
     this.ownerId = ownerId;
 
     // Cloudflare API config disimpan di wrangler secrets dan diteruskan
-    this.accountID = cloudflareConfig.accountID;
-    this.zoneID = cloudflareConfig.zoneID;
-    this.apiKey = cloudflareConfig.apiKey;
-    this.apiEmail = cloudflareConfig.apiEmail;
-    this.serviceName = cloudflareConfig.serviceName;
+    this.accountID = ACCOUNT_ID;
+    this.zoneID = ZONE_ID;
+    this.apiKey = API_KEY;
+    this.apiEmail = API_EMAIL;
+    this.serviceName = SERVICE_NAME;
 
     this.headers = {
       'Authorization': `Bearer ${this.apiKey}`,
