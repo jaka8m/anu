@@ -1,18 +1,19 @@
-name = "anu-bot"
-main = "worker.js"
-compatibility_date = "2025-06-01"
-type = "javascript"  # wajib di wrangler v2/v3
+name = "telegram-wildcard-bot"
+type = "javascript"
+
+account_id = "<your-account-id>"
+workers_dev = true
+route = ""
+zone_id = ""
 
 [vars]
-TELEGRAM_BOT_TOKEN = "7664381872:AAHfoMYhaUYlzRgMlydfA3zvwkMyVLMhoTU"
-OWNER_ID = "1467883032"
+ROOT_DOMAIN = "joss.checker-ip.xyz"
 
-[env.production]
-account_id = "e9930d5ca683b0461f73477050fee0c7"
-zone_id = "80423e7547d2fa85e13796a1f41deced"
-
-[env.production.vars]
-API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
-API_EMAIL = "ambebalong@gmail.com"
+[secrets]
+TELEGRAM_TOKEN = "your-telegram-bot-token"
+OWNER_ID = "123456789"
 ACCOUNT_ID = "e9930d5ca683b0461f73477050fee0c7"
 ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
+API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
+API_EMAIL = "ambebalong@gmail.com"
+SERVICE_NAME = "siren"
