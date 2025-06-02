@@ -1,4 +1,4 @@
-name: Deploy Wildcard Telegram Bot
+name: Deploy to Cloudflare Workers
 
 on:
   push:
@@ -8,20 +8,18 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      - uses: actions/checkout@v3
 
       - name: Install Wrangler
-        run: npm install -g wrangler
+        run: npm install -g @cloudflare/wrangler
 
-      - name: Publish to Cloudflare Worker
+      - name: Publish Worker
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-        run: wrangler deploy
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          OWNER_ID: ${{ secrets.OWNER_ID }}
+        run: |
+          wrangler publish --env production
