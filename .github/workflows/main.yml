@@ -8,18 +8,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Install Wrangler
-        run: npm install -g @cloudflare/wrangler
+      - name: Install latest Wrangler
+        run: npm install -g wrangler
 
-      - name: Publish Worker
+      - name: Deploy to Cloudflare Workers
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          OWNER_ID: ${{ secrets.OWNER_ID }}
-        run: |
-          wrangler deploy --env production
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: wrangler deploy --env production
