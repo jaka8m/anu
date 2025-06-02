@@ -10,7 +10,7 @@ zone_id = ""
 ROOT_DOMAIN = "joss.checker-ip.xyz"
 
 [secrets]
-TELEGRAM_TOKEN = "your-telegram-bot-token"
+TELEGRAM_TOKEN = "7664381872:AAHfoMYhaUYlzRgMlydfA3zvwkMyVLMhoTU"
 OWNER_ID = "123456789"
 ACCOUNT_ID = "e9930d5ca683b0461f73477050fee0c7"
 ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
