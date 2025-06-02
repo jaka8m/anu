@@ -22,13 +22,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Clean npm cache
-        run: npm cache clean --force
-
       - name: Install Wrangler latest globally
         run: npm install -g wrangler@latest
 
-      - name: publish Worker with Wrangler
+      - name: Deploy Worker with Wrangler
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
-        run: wrangler publish
+        run: wrangler deploy
