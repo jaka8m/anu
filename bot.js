@@ -96,14 +96,17 @@ export class TelegramWildcardBot {
   }
 
   async sendMessage(chatId, text, options = {}) {
-    const payload = { chat_id: chatId, text, ...options };
-    const res = await fetch(`${this.apiUrl}/bot${this.token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    return res.json();
-  }
+  const payload = { chat_id: chatId, text, ...options };
+  const response = await fetch(`${this.apiUrl}/bot${this.token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json();
+  console.log('sendMessage response:', data);
+  return data;
+}
+
 
   async deleteMessage(chatId, messageId) {
     await fetch(`${this.apiUrl}/bot${this.token}/deleteMessage`, {
@@ -128,19 +131,24 @@ export class TelegramWildcardBot {
 
   // Webhook update handler
   async handleUpdate(update) {
+  try {
     if (!update.message) return new Response('OK', { status: 200 });
 
     const chatId = update.message.chat.id;
     const text = update.message.text || '';
 
-    // Handle /start
     if (text === '/start') {
       const welcomeMessage = `👋 *Welcome to Wildcard Bot*\n\nAvailable commands:\n` +
         `• /add [subdomain]\n• /del [subdomain]\n• /list\n\n` +
         `Example: \`/add mysubdomain\``;
       await this.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
-      return new Response('OK', { status: 200 });
     }
+
+    return new Response('OK', { status: 200 });
+  } catch (err) {
+    console.error('Error in handleUpdate:', err);
+    return new Response('Internal Server Error', { status: 500 });
+  }
 
     // Unauthorized commands
     if ((text.startsWith('/add ') || text.startsWith('/del ')) && chatId !== this.ownerId) {
