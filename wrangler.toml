@@ -1,6 +1,6 @@
 name = "telegram-wildcard-bot"
 
-account_id = "<your-account-id>"  # Ganti dengan ID akun Cloudflare kamu
+account_id = "e9930d5ca683b0461f73477050fee0c7"  # Ganti dengan ID akun Cloudflare kamu
 workers_dev = true
 
 compatibility_date = "2025-06-02"
