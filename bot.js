@@ -9,7 +9,7 @@ export class TelegramWildcardBot {
     this.apiUrl = apiUrl || 'https://api.telegram.org';
     this.ownerId = ownerId;
 
-    // Cloudflare API config disimpan di wrangler secrets dan diteruskan
+    // Cloudflare API config dari wrangler secrets
     this.accountID = ACCOUNT_ID;
     this.zoneID = ZONE_ID;
     this.apiKey = API_KEY;
@@ -26,7 +26,6 @@ export class TelegramWildcardBot {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  // Escape MarkdownV2 Telegram
   static escapeMarkdownV2(text) {
     return text.replace(/([_*\[\]()~`>#+=|{}.!\\-])/g, '\\$1');
   }
@@ -97,7 +96,6 @@ export class TelegramWildcardBot {
     return this.getDomainList();
   }
 
-  // Telegram API Helpers
   async sendMessage(chatId, text, options = {}) {
     const payload = { chat_id: chatId, text, ...options };
     const res = await fetch(`${this.apiUrl}/bot${this.token}/sendMessage`, {
@@ -129,18 +127,29 @@ export class TelegramWildcardBot {
     return res.json();
   }
 
-  // Main webhook handler
+  // Webhook update handler
   async handleUpdate(update) {
     if (!update.message) return new Response('OK', { status: 200 });
 
     const chatId = update.message.chat.id;
     const text = update.message.text || '';
 
+    // Handle /start
+    if (text === '/start') {
+      const welcomeMessage = `👋 *Welcome to Wildcard Bot*\n\nAvailable commands:\n` +
+        `• /add [subdomain]\n• /del [subdomain]\n• /list\n\n` +
+        `Example: \`/add mysubdomain\``;
+      await this.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
+      return new Response('OK', { status: 200 });
+    }
+
+    // Unauthorized commands
     if ((text.startsWith('/add ') || text.startsWith('/del ')) && chatId !== this.ownerId) {
       await this.sendMessage(chatId, '⛔ You are not authorized to use this command.');
       return new Response('OK', { status: 200 });
     }
 
+    // Handle /add
     if (text.startsWith('/add ')) {
       const subdomain = text.split(' ')[1]?.trim();
       if (!subdomain) return new Response('OK', { status: 200 });
@@ -184,6 +193,7 @@ export class TelegramWildcardBot {
       return new Response('OK', { status: 200 });
     }
 
+    // Handle /del
     if (text.startsWith('/del ')) {
       const subdomain = text.split(' ')[1];
       if (!subdomain) return new Response('OK', { status: 200 });
@@ -202,6 +212,7 @@ export class TelegramWildcardBot {
       return new Response('OK', { status: 200 });
     }
 
+    // Handle /list
     if (text.startsWith('/list')) {
       const domains = await this.listSubdomains();
 
