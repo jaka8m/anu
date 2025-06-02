@@ -28,7 +28,7 @@ jobs:
       - name: Install Wrangler latest globally
         run: npm install -g wrangler@latest
 
-      - name: deploy Worker with Wrangler
+      - name: publish Worker with Wrangler
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
-        run: wrangler deploy
+        run: wrangler publish
