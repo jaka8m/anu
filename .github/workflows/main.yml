@@ -19,7 +19,9 @@ jobs:
           node-version: '18'
 
       - name: Install Wrangler
-        run: npm install -g @cloudflare/wrangler
+        run: |
+          npm uninstall -g @cloudflare/wrangler || true
+          npm install -g wrangler
 
       - name: Publish to Cloudflare Worker
         env:
