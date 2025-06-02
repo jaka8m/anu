@@ -9,6 +9,6 @@
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
-    "@cloudflare/wrangler": "^3.0.0"
+    "@cloudflare/wrangler": "^2.16.0"
   }
 }
