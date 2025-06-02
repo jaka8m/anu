@@ -1,0 +1,14 @@
+{
+  "name": "wildcard-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot untuk manajemen wildcard subdomain dengan Cloudflare Workers",
+  "main": "worker.js",
+  "scripts": {
+    "deploy": "wrangler publish"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/wrangler": "^3.0.0"
+  }
+}
