@@ -9,23 +9,32 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       deployments: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js v20
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Install Wrangler latest globally
-        run: npm install -g wrangler@latest
-
-      - name: Deploy Worker with Wrangler
+          
+      - name: Install Wrangler
+        run: npm install -g wrangler@^3.0.0
+        
+      - name: Publish Worker
         env:
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
-        run: wrangler deploy
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          OWNER_ID: ${{ secrets.OWNER_ID }}
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          ZONE_ID: ${{ secrets.ZONE_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_EMAIL: ${{ secrets.API_EMAIL }}
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+        run: |
+          wrangler publish --account-id $ACCOUNT_ID --api-token $API_TOKEN
