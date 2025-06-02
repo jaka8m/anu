@@ -10,16 +10,16 @@ export class TelegramWildcardBot {
     this.ownerId = ownerId;
 
     // Cloudflare API config disimpan di wrangler secrets dan diteruskan
-    this.AccountID = cloudflareConfig.accountID;
-    this.ZoneID = cloudflareConfig.zoneID;
-    this.ApiKey = cloudflareConfig.apiKey;
-    this.ApiEmail = cloudflareConfig.apiEmail;
-    this.ServiceName = cloudflareConfig.serviceName;
+    this.accountID = cloudflareConfig.accountID;
+    this.zoneID = cloudflareConfig.zoneID;
+    this.apiKey = cloudflareConfig.apiKey;
+    this.apiEmail = cloudflareConfig.apiEmail;
+    this.serviceName = cloudflareConfig.serviceName;
 
     this.headers = {
-      'Authorization': `Bearer ${this.ApiKey}`,
-      'X-Auth-Email': this.ApiEmail,
-      'X-Auth-Key': this.ApiKey,
+      'Authorization': `Bearer ${this.apiKey}`,
+      'X-Auth-Email': this.apiEmail,
+      'X-Auth-Key': this.apiKey,
       'Content-Type': 'application/json'
     };
 
@@ -32,12 +32,12 @@ export class TelegramWildcardBot {
   }
 
   async getDomainList() {
-    const url = `https://api.cloudflare.com/client/v4/accounts/${this.AccountID}/workers/domains`;
+    const url = `https://api.cloudflare.com/client/v4/accounts/${this.accountID}/workers/domains`;
     const res = await fetch(url, { headers: this.headers });
     if (!res.ok) return [];
     const json = await res.json();
     return json.result
-      .filter(d => d.service === this.ServiceName)
+      .filter(d => d.service === this.serviceName)
       .map(d => d.hostname);
   }
 
@@ -56,12 +56,12 @@ export class TelegramWildcardBot {
       return 400;
     }
 
-    const url = `https://api.cloudflare.com/client/v4/accounts/${this.AccountID}/workers/domains`;
+    const url = `https://api.cloudflare.com/client/v4/accounts/${this.accountID}/workers/domains`;
     const body = {
       environment: "production",
       hostname: domain,
-      service: this.ServiceName,
-      zone_id: this.ZoneID
+      service: this.serviceName,
+      zone_id: this.zoneID
     };
 
     const res = await fetch(url, {
@@ -75,7 +75,7 @@ export class TelegramWildcardBot {
 
   async deleteSubdomain(subdomain) {
     const domain = `${subdomain}.${rootDomain}`.toLowerCase();
-    const urlList = `https://api.cloudflare.com/client/v4/accounts/${this.AccountID}/workers/domains`;
+    const urlList = `https://api.cloudflare.com/client/v4/accounts/${this.accountID}/workers/domains`;
 
     const listRes = await fetch(urlList, { headers: this.headers });
     if (!listRes.ok) return listRes.status;
