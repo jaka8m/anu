@@ -1,13 +1,18 @@
 name = "anu-bot"
 main = "worker.js"
 compatibility_date = "2025-06-01"
-type = "javascript"      # wajib ada di wrangler v2
+type = "javascript"  # wajib di wrangler v2/v3
 
 [vars]
-CF_ACCOUNT_ID = "e9930d5ca683b0461f73477050fee0c7"
-CF_ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
-CF_API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
-CF_API_EMAIL = "ambebalong@gmail.com"
-
 TELEGRAM_BOT_TOKEN = "7664381872:AAHfoMYhaUYlzRgMlydfA3zvwkMyVLMhoTU"
 OWNER_ID = "1467883032"
+
+[env.production]
+account_id = "e9930d5ca683b0461f73477050fee0c7"
+zone_id = "80423e7547d2fa85e13796a1f41deced"
+
+[env.production.vars]
+API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
+API_EMAIL = "ambebalong@gmail.com"
+ACCOUNT_ID = "e9930d5ca683b0461f73477050fee0c7"
+ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
