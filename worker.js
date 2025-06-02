@@ -1,20 +1,28 @@
 import { TelegramWildcardBot } from './bot.js';
 
-const TELEGRAM_TOKEN = __STATIC_CONTENT.get('TELEGRAM_TOKEN'); // disimpan di secret wrangler
-const OWNER_ID = Number(__STATIC_CONTENT.get('OWNER_ID'));
+const TELEGRAM_TOKEN = TELEGRAM_TOKEN; // dari secrets
+const OWNER_ID = Number(OWNER_ID);     // dari secrets
+
 const CONFIG = {
-  accountID: __STATIC_CONTENT.get('ACCOUNT_ID'),
-  zoneID: __STATIC_CONTENT.get('ZONE_ID'),
-  apiKey: __STATIC_CONTENT.get('API_KEY'),
-  apiEmail: __STATIC_CONTENT.get('API_EMAIL'),
-  serviceName: __STATIC_CONTENT.get('SERVICE_NAME') || 'siren',
+  accountID: ACCOUNT_ID,      // dari secrets
+  zoneID: ZONE_ID,            // dari secrets
+  apiKey: API_KEY,            // dari secrets
+  apiEmail: API_EMAIL,        // dari secrets
+  serviceName: SERVICE_NAME || 'siren', // dari secrets
 };
 
-const bot = new TelegramWildcardBot(TELEGRAM_TOKEN, 'https://api.telegram.org', OWNER_ID, CONFIG);
+const bot = new TelegramWildcardBot(
+  TELEGRAM_TOKEN,
+  'https://api.telegram.org',
+  OWNER_ID,
+  CONFIG
+);
 
 export default {
   async fetch(request) {
-    if (request.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+    if (request.method !== 'POST') {
+      return new Response('Method Not Allowed', { status: 405 });
+    }
 
     let update;
     try {
