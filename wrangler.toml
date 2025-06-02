@@ -1,19 +1,10 @@
 name = "telegram-wildcard-bot"
-type = "javascript"
 
-account_id = "<your-account-id>"
+account_id = "<your-account-id>"  # Ganti dengan ID akun Cloudflare kamu
 workers_dev = true
-route = ""
-zone_id = ""
+
+compatibility_date = "2025-06-02"
+main = "worker.js"  # Sesuaikan dengan nama file Worker utama kamu, misal worker.js
 
 [vars]
 ROOT_DOMAIN = "joss.checker-ip.xyz"
-
-[secrets]
-TELEGRAM_TOKEN = "7664381872:AAHfoMYhaUYlzRgMlydfA3zvwkMyVLMhoTU"
-OWNER_ID = "123456789"
-ACCOUNT_ID = "e9930d5ca683b0461f73477050fee0c7"
-ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
-API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
-API_EMAIL = "ambebalong@gmail.com"
-SERVICE_NAME = "siren"
