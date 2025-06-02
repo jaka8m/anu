@@ -11,14 +11,13 @@ export async function WildcardBot(link) {
 // Global constants & config
 // =======================
 const rootDomain = "joss.checker-ip.xyz";
-const accountID = Deno.env.get("CF_ACCOUNT_ID") || ""; 
-const zoneID = Deno.env.get("CF_ZONE_ID") || "";
-const apiKey = Deno.env.get("CF_API_KEY") || "";
-const apiEmail = Deno.env.get("CF_API_EMAIL") || "";
+const accountID = typeof ACCOUNT_ID !== "undefined" ? CF_ACCOUNT_ID : "";
+const zoneID = typeof ZONE_ID !== "undefined" ? CF_ZONE_ID : "";
+const apiKey = typeof API_KEY !== "undefined" ? CF_API_KEY : "";
+const apiEmail = typeof API_EMAIL !== "undefined" ? CF_API_EMAIL : "";
 const serviceName = "siren";
 
 const headers = {
-  'Authorization': `Bearer ${apiKey}`,
   'X-Auth-Email': apiEmail,
   'X-Auth-Key': apiKey,
   'Content-Type': 'application/json'
