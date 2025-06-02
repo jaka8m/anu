@@ -1,4 +1,4 @@
-import { TelegramWildcardBot } from './bot.js';
+import { WildcardBot, TelegramWildcardBot } from './bot.js';
 
 let bot;
 
