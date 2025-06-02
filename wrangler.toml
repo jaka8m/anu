@@ -9,5 +9,5 @@ CF_ZONE_ID = "80423e7547d2fa85e13796a1f41deced"
 CF_API_KEY = "5fae9fcb9c193ce65de4b57689a94938b708e"
 CF_API_EMAIL = "ambebalong@gmail.com"
 
-TELEGRAM_BOT_TOKEN = "<your-telegram-bot-token>"
-OWNER_ID = "<your-telegram-owner-chat-id>"
+TELEGRAM_BOT_TOKEN = "7664381872:AAHfoMYhaUYlzRgMlydfA3zvwkMyVLMhoTU"
+OWNER_ID = "1467883032"
