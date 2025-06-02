@@ -1,4 +1,4 @@
-name = "wildcard-telegram-bot"
+name = "anu-bot"
 main = "worker.js"
 compatibility_date = "2025-06-01"
 type = "javascript"      # wajib ada di wrangler v2
